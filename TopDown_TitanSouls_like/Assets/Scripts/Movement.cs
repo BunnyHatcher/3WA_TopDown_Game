@@ -14,6 +14,10 @@ public class Movement : MonoBehaviour
 
     [SerializeField] private float _moveSpeed = 10f;
 
+    //Bool to check if player has controls at the moment
+    public bool _isControllable = true;
+
+
 
     
     void Start()
@@ -27,26 +31,31 @@ public class Movement : MonoBehaviour
 
     void Update() //receive input for movement
     {
-        _direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        if (_isControllable)
 
-        // check with magnitude (=length of vector3), if player is moving or not
-        if (_direction.magnitude > 0) //if magnitude is above 0, the player is moving
         {
-            // use animators for the corresponding movement direction
-            _animator.SetFloat("SpeedX", _direction.x);
-            _animator.SetFloat("SpeedY", _direction.y);
-            _animator.SetBool("isMoving", true);
+            _direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-            // clamp
-            _orientation = Vector2.ClampMagnitude(_direction * 10000f, 1f);
-        }
+            // check with magnitude (=length of vector3), if player is moving or not
+            if (_direction.magnitude > 0) //if magnitude is above 0, the player is moving
+            {
+                // use animators for the corresponding movement direction
+                _animator.SetFloat("SpeedX", _direction.x);
+                _animator.SetFloat("SpeedY", _direction.y);
+                _animator.SetBool("isMoving", true);
 
-        else //if magnitude is below 0, the player is not moving
-        {
-            // use animators for the corresponding idle direction
-            _animator.SetFloat("SpeedX", _orientation.x);
-            _animator.SetFloat("SpeedY", _orientation.y);
-            _animator.SetBool("isMoving", false);
+                // clamp
+                _orientation = Vector2.ClampMagnitude(_direction * 10000f, 1f);
+            }
+
+            else //if magnitude is below 0, the player is not moving
+            {
+                // use animators for the corresponding idle direction
+                _animator.SetFloat("SpeedX", _orientation.x);
+                _animator.SetFloat("SpeedY", _orientation.y);
+                _animator.SetBool("isMoving", false);
+
+            }
 
         }
 
