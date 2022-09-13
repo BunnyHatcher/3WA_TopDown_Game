@@ -551,6 +551,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc0288705797844aab14507286beb53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerMovement: {fileID: 0}
+  _player: {fileID: 0}
 --- !u!1101 &8179738566758885101
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

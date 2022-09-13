@@ -7,6 +7,7 @@ public class RollBehaviour : StateMachineBehaviour
     // Unity does not allow yet to slide the Movement script into the public field via the inspector
     // we need to retrieve manually first the Movement script the GameObject via Script 
     // then we retrieve the Player Game Object via GetComponent
+    
     public Movement _playerMovement;
     public GameObject _player;
     
@@ -15,9 +16,10 @@ public class RollBehaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        _player = GameObject.Find("Player");
-        _playerMovement = _player.GetComponent<Movement>();
         Debug.Log("start roll animation");
+
+        _player = GameObject.Find("Player"); // find player game object in project
+        _playerMovement = _player.GetComponent<Movement>();//retrieve the component needed
         _playerMovement._isControllable = false; // switch off controls for player
     }
 
