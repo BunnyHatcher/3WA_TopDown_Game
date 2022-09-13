@@ -15,8 +15,10 @@ public class RollBehaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("start roll animation");
-        CharacterStateMachine._playerMovement._isControllable = false; // switch off controls for player
+        Debug.Log("start roll animation state");
+        animator.gameObject.GetComponent<Movement>()._isControllable = false; // switch off controls for player
+        animator.gameObject.GetComponent<Movement>().currentSpeed = animator.gameObject.GetComponent<Movement>()._runSpeed;
+        CharacterStateMachine._playerMovement._isControllable = false; 
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -28,7 +30,7 @@ public class RollBehaviour : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("end roll animation");
+        Debug.Log("end roll animation state");
         CharacterStateMachine._playerMovement._isControllable = true; // switch player controls back on
     }
 

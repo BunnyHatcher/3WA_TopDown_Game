@@ -12,13 +12,25 @@ public class Movement : MonoBehaviour
     private Vector2 _direction;
     private Vector2 _orientation;
 
-    [SerializeField] private float _moveSpeed = 10f;
+    //the different movement speeds
+    public float _runSpeed = 10f;
+    public float _rollSpeed = 5f;
+    public float _sprintSpeed = 15f;
+    
+    //speed currently effective
+    public float currentSpeed;
 
     //Bool to check if player has controls at the moment
     public bool _isControllable = true;
 
     // bool to check if player is rolling
     public bool _isRolling = false;
+    
+    // floats for calculating cooldown delay between two rolls
+    [SerializeField]
+    private float _rollDuration = 0.5f; // duration of roll in sec
+    private float _timeRollFinish = 0; // timer after the end of the roll
+
 
 
 
@@ -46,7 +58,7 @@ public class Movement : MonoBehaviour
                 _animator.SetFloat("SpeedY", _direction.y);
                 _animator.SetBool("isMoving", true);
 
-                // clamp
+                // clamp orientation
                 _orientation = Vector2.ClampMagnitude(_direction * 10000f, 1f);
 
                 // trigger roll
@@ -56,6 +68,17 @@ public class Movement : MonoBehaviour
                     _isRolling = true;
                     _animator.SetBool("isRolling", true);
 
+                    //calculate roll timer: add time passed to time until roll is finished
+                    _timeRollFinish =_rollDuration + Time.timeSinceLevelLoad;
+                    
+                }
+                
+                bool rollFinish = Time.timeSinceLevelLoad > _timeRollFinish;
+
+                if (!Input.GetButtonDown("Jump") && rollFinish)
+                {
+                    _isRolling = false;
+                    _animator.SetBool("isRolling", false);
                 }
 
             }
@@ -74,7 +97,7 @@ public class Movement : MonoBehaviour
     }
         private void FixedUpdate() //transform movement input into actual movement
         {
-            _rb2d.velocity = _direction.normalized * _moveSpeed;
+            _rb2d.velocity = _direction.normalized * _runSpeed;
 
         }
 }
