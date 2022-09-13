@@ -18,7 +18,7 @@ public class Movement : MonoBehaviour
     public float _sprintSpeed = 15f;
     
     //speed currently effective
-    public float currentSpeed;
+    public float _currentSpeed;
 
     //Bool to check if player has controls at the moment
     public bool _isControllable = true;
