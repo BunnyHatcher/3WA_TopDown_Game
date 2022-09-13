@@ -17,9 +17,11 @@ public class Movement : MonoBehaviour
     //Bool to check if player has controls at the moment
     public bool _isControllable = true;
 
+    // bool to check if player is rolling
+    public bool _isRolling = false;
 
 
-    
+
     void Start()
     {
         // set up Rigidbody for use in the script
@@ -46,6 +48,16 @@ public class Movement : MonoBehaviour
 
                 // clamp
                 _orientation = Vector2.ClampMagnitude(_direction * 10000f, 1f);
+
+                // trigger roll
+                if(Input.GetButtonDown("Jump"))
+                {
+
+                    _isRolling = true;
+                    _animator.SetBool("isRolling", true);
+
+                }
+
             }
 
             else //if magnitude is below 0, the player is not moving
