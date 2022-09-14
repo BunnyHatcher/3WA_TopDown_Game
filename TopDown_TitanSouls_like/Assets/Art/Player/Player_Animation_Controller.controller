@@ -561,7 +561,7 @@ BlendTree:
     m_DirectBlendParameter: SpeedX
     m_Mirror: 0
   m_BlendParameter: SpeedX
-  m_BlendParameterY: Blend
+  m_BlendParameterY: SpeedY
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
@@ -579,7 +579,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b7acf8a8e262d41b1eca2c63c7961c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterStateMachine: {fileID: 0}
 --- !u!1101 &5438590885306603924
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
